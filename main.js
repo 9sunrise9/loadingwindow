@@ -15,34 +15,35 @@ function createWindow() {
         width: 1200,
         height: 675,
         show:false,
+        autoHideMenuBar:true,
         frame: true
    });
     loadingWindow = new BrowserWindow({
         toolbar: false,
         width: 600,
         height: 300,
-        frame: true,
-       type:'splash',
-        transparent: false
+        frame: false,
+        type:'splash',
+        transparent: true
     });
     // 通过浏览器窗口对象加载index.html文件，同时也是可以加载一个互联网地址的
 mainWindow.once('ready-to-show',() =>{
   mainWindow.show()
-  loadingWindow.close()
+  //loadingWindow.close()
 });
     mainWindow.loadURL('file://' + __dirname + '/index.html');
     // 同时也可以简化成：mainWindow.loadURL('./index.html');
     // 监听浏览器窗口对象是否关闭，关闭之后直接将mainWindow指向空引用，也就是回收对象内存空间
     mainWindow.on("closed", function() {
         mainWindow = null;
+        loadingWindow.close();
     });
     loadingWindow.loadURL('file://' + __dirname + '/loading.html');
     // 同时也可以简化成：mainWindow.loadURL('./index.html');
     // 监听浏览器窗口对象是否关闭，关闭之后直接将mainWindow指向空引用，也就是回收对象内存空间
     loadingWindow.on("closed", function() {
-        mainWindow = null;
+        loadingWindow = null;
     });
-    mainWindow.setMenu(null);
 //    mainWindow.setAlwaysOnTop(true);
   //  loadingWindow.center();
 }

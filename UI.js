@@ -11,6 +11,5 @@ var options = [
 ]
 
 function notify() {
-loadingWindow.close();
-  //new Notification(options[0].title, options[0]);
+  new Notification(options[0].title, options[0]);
 }
