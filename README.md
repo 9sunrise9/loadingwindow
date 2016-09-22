@@ -18,4 +18,4 @@ loadingWindow = new BrowserWindow({
 });
 ```
 ### nw添加splash window 的方法
-[there](http://stackoverflow.com/questions/34735806/how-to-create-loading-screen-for-node-webkit)
+[here](http://stackoverflow.com/questions/34735806/how-to-create-loading-screen-for-node-webkit)
