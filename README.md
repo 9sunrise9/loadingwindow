@@ -15,7 +15,7 @@ loadingWindow = new BrowserWindow({
     mainWindow.once('ready-to-show',() =>{
     mainWindow.show()
     loadingWindow.close()
-});```
-
+});
+```
 ### nw添加splash window 的方法
 [there](http://stackoverflow.com/questions/34735806/how-to-create-loading-screen-for-node-webkit)
