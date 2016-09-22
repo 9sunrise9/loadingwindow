@@ -6,22 +6,45 @@ const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 // 声明一个BrowserWindow对象实例
 let mainWindow;
+let loadingWindow;
 //定义一个创建浏览器窗口的方法
 function createWindow() {
     // 创建一个浏览器窗口对象，并指定窗口的大小
     mainWindow = new BrowserWindow({
-        toolbar: true,
+        toolbar: false,
         width: 1200,
         height: 675,
+        show:false,
         frame: true
+   });
+    loadingWindow = new BrowserWindow({
+        toolbar: false,
+        width: 600,
+        height: 300,
+        frame: true,
+       type:'splash',
+        transparent: false
     });
     // 通过浏览器窗口对象加载index.html文件，同时也是可以加载一个互联网地址的
+mainWindow.once('ready-to-show',() =>{
+  mainWindow.show()
+  loadingWindow.close()
+});
     mainWindow.loadURL('file://' + __dirname + '/index.html');
     // 同时也可以简化成：mainWindow.loadURL('./index.html');
     // 监听浏览器窗口对象是否关闭，关闭之后直接将mainWindow指向空引用，也就是回收对象内存空间
     mainWindow.on("closed", function() {
         mainWindow = null;
     });
+    loadingWindow.loadURL('file://' + __dirname + '/loading.html');
+    // 同时也可以简化成：mainWindow.loadURL('./index.html');
+    // 监听浏览器窗口对象是否关闭，关闭之后直接将mainWindow指向空引用，也就是回收对象内存空间
+    loadingWindow.on("closed", function() {
+        mainWindow = null;
+    });
+    mainWindow.setMenu(null);
+//    mainWindow.setAlwaysOnTop(true);
+  //  loadingWindow.center();
 }
 // 监听应用程序对象是否初始化完成，初始化完成之后即可创建浏览器窗口
 app.on("ready", createWindow);
