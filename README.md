@@ -1,4 +1,4 @@
-# loadingwindow
+# loading window
 
 ### 应用载入前loading（splash）window 的方法
 设置主窗口`show：false` 并添加：
