@@ -1,7 +1,7 @@
 # loadingwindow
 
 ### 应用载入前loading（splash）window 的方法
-设置主窗口`show：false` 添加：
+设置主窗口`show：false` 并添加：
 ```javascript    
 loadingWindow = new BrowserWindow({
         toolbar: false,
@@ -16,3 +16,6 @@ loadingWindow = new BrowserWindow({
     mainWindow.show()
     loadingWindow.close()
 });```
+
+### nw添加splash window 的方法
+[there](http://stackoverflow.com/questions/34735806/how-to-create-loading-screen-for-node-webkit)
