@@ -1,20 +1,16 @@
-
-var options = [
-  {
-    title: "启动完毕",
-    body: "主窗口启动"
-  },
-  {
-    title: "Content-Image Notification",
-    body: "Short message plus a custom content image",
-  }
-]
-
+const ipcRenderer = require('electron').ipcRenderer
 function notify() {
-  new Notification(options[0].title, options[0]);
+  new Notification("启动完毕",   {
+      title: "启动完毕",
+      body: "主窗口启动"
+    });
 }
 
 function message() {
-  const {dialog} = require('electron').remote
-  console.log(dialog.showOpenDialog({properties: ['openFile', 'openDirectory', 'multiSelections']}))；
+  console.log(ipcRenderer.sendSync('synchronous-message', 'ping')); // 发送一个同步消息synchronous-message
+
+  ipcRenderer.on('asynchronous-reply', function(event, arg) {
+    console.log(arg); // 监听异步消息asynchronous-reply
+  });
+  ipcRenderer.send('asynchronous-message', 'ping');//发送消息
 }

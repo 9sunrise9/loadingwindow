@@ -30,8 +30,6 @@ function createWindow() {
     // 通过浏览器窗口对象加载index.html文件，同时也是可以加载一个互联网地址的
 mainWindow.once('ready-to-show',() =>{
   mainWindow.show()
-
-  console.log(dialog.showMessageBox({type:"warning",buttons:['ok','no'],title:"hello world",message:"success!",detail:"lalallalalallalalalalalalalal"}))
   //loadingWindow.close()
 });
     mainWindow.loadURL('file://' + __dirname + '/index.html');
@@ -65,4 +63,16 @@ app.on("activate", function() {
     if(mainWindow === null) {
         createWindow();
     }
+});
+
+
+const ipcMain = require('electron').ipcMain;
+ipcMain.on('asynchronous-message', function(event, arg) {
+  console.log(dialog.showMessageBox({type:"warning",buttons:['ok','no'],title:"hello world",message:"success!",detail:arg}))  // prints "ping"
+  event.sender.send('asynchronous-reply', 'pong');
+});
+
+ipcMain.on('synchronous-message', function(event, arg) {
+  console.log(arg);  // prints "ping"
+  event.returnValue = 'pong';
 });
