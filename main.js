@@ -1,5 +1,6 @@
 // 载入electron模块
 const electron = require("electron");
+const {dialog} = require('electron')
 // 创建应用程序对象
 const app = electron.app;
 // 创建一个浏览器窗口，主要用来加载HTML页面
@@ -29,6 +30,8 @@ function createWindow() {
     // 通过浏览器窗口对象加载index.html文件，同时也是可以加载一个互联网地址的
 mainWindow.once('ready-to-show',() =>{
   mainWindow.show()
+
+  console.log(dialog.showMessageBox({type:"warning",buttons:['ok','no'],title:"hello world",message:"success!",detail:"lalallalalallalalalalalalalal"}))
   //loadingWindow.close()
 });
     mainWindow.loadURL('file://' + __dirname + '/index.html');

@@ -13,3 +13,8 @@ var options = [
 function notify() {
   new Notification(options[0].title, options[0]);
 }
+
+function message() {
+  const {dialog} = require('electron').remote
+  console.log(dialog.showOpenDialog({properties: ['openFile', 'openDirectory', 'multiSelections']}))；
+}
