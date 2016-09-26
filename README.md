@@ -30,8 +30,8 @@ loadingWindow = new BrowserWindow({
 
 `console.log(dialog.showMessageBox({type:"warning",buttons:['ok','no'],title:"helloworld",message:"success!",detail:"lalallalalallalalalalalalalal"}))`
 
-## 快捷键
-> 快捷键只能在本窗口中使用
+## 全局快捷键
+**mainWindow.restore()之前必须先focus()**
 
 
 ```javascript
