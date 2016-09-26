@@ -9,8 +9,10 @@ function notify() {
 function message() {
   console.log(ipcRenderer.sendSync('synchronous-message', 'ping')); // 发送一个同步消息synchronous-message
 
-  ipcRenderer.on('asynchronous-reply', function(event, arg) {
-    console.log(arg); // 监听异步消息asynchronous-reply
-  });
+
   ipcRenderer.send('asynchronous-message', 'ping');//发送消息
 }
+
+ipcRenderer.on('asynchronous-reply', function(event, arg) {
+alert(arg); // 监听异步消息asynchronous-reply
+});

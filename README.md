@@ -29,3 +29,35 @@ loadingWindow = new BrowserWindow({
 [官方文档](https://github.com/electron/electron/blob/master/docs/api/dialog.md)
 
 `console.log(dialog.showMessageBox({type:"warning",buttons:['ok','no'],title:"helloworld",message:"success!",detail:"lalallalalallalalalalalalalal"}))`
+
+## 快捷键
+> 快捷键只能在本窗口中使用
+
+
+```javascript
+app.on("ready", () => {
+  createWindow();
+  globalShortcut.unregisterAll();
+  const ret = globalShortcut.register('CommandOrControl+`', () => {
+if (mainWindow.isMinimized()) {
+  mainWindow.restore()
+} else {
+  mainWindow.minimize()
+}
+
+});
+if (!ret) {
+  console.log('registration failed')
+}
+console.log(globalShortcut.isRegistered('CommandOrControl+X'))
+})
+
+
+// 监听应用程序对象中的所有浏览器窗口对象是否全部被关闭，如果全部被关闭，则退出整个应用程序。该
+app.on("window-all-closed", () => {
+  // Unregister a shortcut.
+  globalShortcut.unregister('CommandOrControl+X')
+
+  // Unregister all shortcuts.
+  globalShortcut.unregisterAll()
+```
