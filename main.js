@@ -50,9 +50,13 @@ app.on("ready", () => {
   createWindow();
   globalShortcut.unregisterAll();
   const ret = globalShortcut.register('CommandOrControl+`', () => {
+    console.log('ok')
 if (mainWindow.isMinimized()) {
+  console.log('恢复')
+  mainWindow.focus()
   mainWindow.restore()
 } else {
+  console.log('最小化')
   mainWindow.minimize()
 }
 
@@ -60,7 +64,7 @@ if (mainWindow.isMinimized()) {
 if (!ret) {
   console.log('registration failed')
 }
-console.log(globalShortcut.isRegistered('CommandOrControl+X'))
+console.log(globalShortcut.isRegistered('CommandOrControl+`'))
 })
 
 
