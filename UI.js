@@ -1,4 +1,4 @@
-require ('vue.js');
+require ('/home/sunyue/文档/loading2/vue.js');
 const ipcRenderer = require('electron').ipcRenderer
 function notify() {
   new Notification("Windy",   {
@@ -19,8 +19,11 @@ ipcRenderer.on('minsize', function(event, arg) {
 });
 
 new Vue({
-    el: '#app',
-    data: {
-        message: 'Hello Vue.js!'
-    }
+  el: '#editor',
+  data: {
+    input: '# hello'
+  },
+  filters: {
+    marked: marked
+  }
 })
