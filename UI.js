@@ -1,8 +1,9 @@
+require ('vue.js');
 const ipcRenderer = require('electron').ipcRenderer
 function notify() {
-  new Notification("启动完毕",   {
-      title: "启动完毕",
-      body: "主窗口启动"
+  new Notification("Windy",   {
+      title: "Windy",
+      body: "最小化"
     });
 }
 
@@ -13,6 +14,13 @@ function message() {
   ipcRenderer.send('asynchronous-message', 'ping');//发送消息
 }
 
-ipcRenderer.on('asynchronous-reply', function(event, arg) {
-alert(arg); // 监听异步消息asynchronous-reply
+ipcRenderer.on('minsize', function(event, arg) {
+ notify();// 监听异步消息asynchronous-reply
 });
+
+new Vue({
+    el: '#app',
+    data: {
+        message: 'Hello Vue.js!'
+    }
+})

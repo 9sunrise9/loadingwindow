@@ -62,3 +62,47 @@ app.on("window-all-closed", () => {
   // Unregister all shortcuts.
   globalShortcut.unregisterAll()
 ```
+
+## Tray
+**在.desktop文件加入EX项前加入：`env XDG_CURRENT_DESKTOP=Unity` 就能显示tray**
+```
+[Desktop Entry]
+Name=Wechat
+Exec=env XDG_CURRENT_DESKTOP=Unity /home/sunyue/electronic-wechat/dist/electronic-wechat-linux-x64/electronic-wechat
+Terminal=false
+Type=Application
+Icon=/home/sunyue/electronic-wechat/assets/icon.png
+```
+terminal运行时添加参数`env XDG_CURRENT_DESKTOP=Unity electron .
+`
+
+## 主进程与渲染进程间通信
+
+### 消息通信
+```javascript
+//mian.js
+ipcMain.on('asynchronous-message', (event, arg) => {
+  console.log(dialog.showMessageBox({type:"warning",buttons:['ok','no'],title:"hello world",message:"success!",detail:arg}))  // prints "ping"
+  event.sender.send('misize', 'pong');
+});
+
+ipcMain.on('synchronous-message', (event, arg) =>{
+  console.log(arg);  // prints "ping"
+  event.returnValue = 'pong';
+});
+
+//或
+  mainWindow.webContents.send('minsize', 'pong');
+//index.html
+const ipcRenderer = require('electron').ipcRenderer
+function message() {
+  console.log(ipcRenderer.sendSync('synchronous-message', 'ping')); // 发送一个同步消息synchronous-message
+
+
+  ipcRenderer.send('asynchronous-message', 'ping');//发送消息
+}
+
+ipcRenderer.on('minsize', function(event, arg) {
+ notify();// 监听异步消息asynchronous-reply
+});
+```

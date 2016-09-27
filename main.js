@@ -1,11 +1,16 @@
-const electron = require("electron");
-const dialog = electron.dialog;
-const app = electron.app;
-const globalShortcut = electron.globalShortcut
-const BrowserWindow = electron.BrowserWindow;
+const {electron ,dialog,Tray,app,globalShortcut,BrowserWindow,Menu,ipcMain,sender}= require("electron");
+//const dialog = electron.dialog;
+//const Tray = electron.Tray
+//const app = electron.app;
+//const globalShortcut = electron.globalShortcut;
+//const BrowserWindow = electron.BrowserWindow;
+//const Menu = electron.Menu;
+//const ipcMain = electron.ipcMain;
+//const sender = electron.ipcMain.sender;
 
 let mainWindow;
 let loadingWindow;
+let tray = null;
 //定义一个创建浏览器窗口的方法
 function createWindow() {
     // 创建一个浏览器窗口对象，并指定窗口的大小
@@ -15,8 +20,10 @@ function createWindow() {
         height: 675,
         show:false,
         autoHideMenuBar:true,
+        icon: '123.png',
         frame: true
    });
+   const appIcon = new Tray('123.png')
     loadingWindow = new BrowserWindow({
         toolbar: false,
         width: 600,
@@ -35,7 +42,9 @@ mainWindow.once('ready-to-show',() =>{
     // 监听浏览器窗口对象是否关闭，关闭之后直接将mainWindow指向空引用，也就是回收对象内存空间
     mainWindow.on("closed", () => {
         mainWindow = null;
-      //  loadingWindow.close();
+      if(loadingWindow){
+        loadingWindow.close();
+      }
     });
     loadingWindow.loadURL('file://' + __dirname + '/loading.html');
     // 同时也可以简化成：mainWindow.loadURL('./index.html');
@@ -48,15 +57,23 @@ mainWindow.once('ready-to-show',() =>{
 // 监听应用程序对象是否初始化完成，初始化完成之后即可创建浏览器窗口
 app.on("ready", () => {
   createWindow();
+  tray = new Tray('icon.png')
+  const contextMenu = Menu.buildFromTemplate([
+    {label: 'Item1', type: 'radio'},
+    {label: 'Item2', type: 'radio'},
+    {label: 'Item3', type: 'radio', checked: true},
+    {label: 'Item4', type: 'radio'}
+  ])
+  tray.setToolTip('This is my application.')
+  tray.setContextMenu(contextMenu)
   globalShortcut.unregisterAll();
   const ret = globalShortcut.register('CommandOrControl+`', () => {
-    console.log('ok')
+
 if (mainWindow.isMinimized()) {
-  console.log('恢复')
   mainWindow.focus()
   mainWindow.restore()
 } else {
-  console.log('最小化')
+  mainWindow.webContents.send('minsize', 'pong');
   mainWindow.minimize()
 }
 
@@ -99,7 +116,7 @@ app.on("activate", () => {
 });
 
 
-const ipcMain = require('electron').ipcMain;
+
 ipcMain.on('asynchronous-message', (event, arg) => {
   console.log(dialog.showMessageBox({type:"warning",buttons:['ok','no'],title:"hello world",message:"success!",detail:arg}))  // prints "ping"
   event.sender.send('asynchronous-reply', 'pong');
