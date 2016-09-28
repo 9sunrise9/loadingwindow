@@ -1,19 +1,22 @@
 {
-    "name": "My First Electron App",
-    "version": "0.0.1",
-    "main": "main.js",
-    "window": {
-        "title": "Data Plot",
-        "toolbar": true,
-        "frame": true,
-        "width": 1200,
-        "height": 675,
-        "min_width": 1200,
-        "min_height": 675,
-        "max_width": 3200,
-        "max_height": 1600
-    },
-    "webkit": {
-        "plugin": true
-    }
+  "name": "My First Electron App",
+  "version": "0.0.1",
+  "main": "main.js",
+  "window": {
+    "title": "Data Plot",
+    "toolbar": true,
+    "frame": true,
+    "width": 1200,
+    "height": 675,
+    "min_width": 1200,
+    "min_height": 675,
+    "max_width": 3200,
+    "max_height": 1600
+  },
+  "webkit": {
+    "plugin": true
+  },
+  "dependencies": {
+    "marked": "^0.3.6"
+  }
 }

@@ -4,7 +4,10 @@
 <head>
 
   <meta charset="UTF-8">
-
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,600|Roboto Mono" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Dosis:300,500&text=Vue.js" rel="stylesheet" type="text/css">
+  <link href="//cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css" rel="stylesheet" type="text/css">
+  <link rel="icon" href="/images/logo.png" type="image/x-icon">
     <script type="text/javascript" src="vue.js"></script>
   <link rel="stylesheet" type="text/css" href="style.css">
   <title>Light Loader</title>
@@ -12,7 +15,7 @@
 
 
 </head>
-<div id="app">
+<div id="editor">
   <textarea v-model="input" debounce="300"></textarea>
     <div v-html="input | marked"></div>
 </div>

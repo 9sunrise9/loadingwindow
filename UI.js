@@ -1,3 +1,4 @@
+var marked = require('marked');
 require ('/home/sunyue/文档/loading2/vue.js');
 const ipcRenderer = require('electron').ipcRenderer
 function notify() {
