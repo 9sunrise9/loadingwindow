@@ -67,14 +67,16 @@ app.on("ready", () => {
   tray.setToolTip('This is my application.')
   tray.setContextMenu(contextMenu)
   globalShortcut.unregisterAll();
+
+  //快捷键响应逻辑：先判断是否最小化，如果最小化则focus并且restore，如果没有最小化并且focus则最小化，如果没有最小化且没有focus则focus
   const ret = globalShortcut.register('CommandOrControl+`', () => {
 
-if (mainWindow.isMinimized()) {
+if (mainWindow.isMinimized()|!mainWindow.isFocused()) {
   mainWindow.focus()
   mainWindow.restore()
 } else {
-  mainWindow.webContents.send('minsize', 'pong');
-  mainWindow.minimize()
+    mainWindow.webContents.send('minsize', 'pong');
+    mainWindow.minimize()
 }
 
 });

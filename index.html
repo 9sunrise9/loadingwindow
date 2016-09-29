@@ -4,10 +4,7 @@
 <head>
 
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,600|Roboto Mono" type="text/css">
-  <link href="//fonts.googleapis.com/css?family=Dosis:300,500&text=Vue.js" rel="stylesheet" type="text/css">
-  <link href="//cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css" rel="stylesheet" type="text/css">
-  <link rel="icon" href="/images/logo.png" type="image/x-icon">
+  <script src="/home/sunyue/node_modules/chart.js/src/chart.js"></script>
     <script type="text/javascript" src="vue.js"></script>
   <link rel="stylesheet" type="text/css" href="style.css">
   <title>Light Loader</title>
@@ -19,10 +16,12 @@
   <textarea v-model="input" debounce="300"></textarea>
     <div v-html="input | marked"></div>
 </div>
-<script type="text/javascript" src="UI.js"></script>
+
 <body>
 <button type="button" name="button" onclick="notify()"> 通知！</button>
 <button type="button" name="button" onclick="message()"> 消息！</button>
+<canvas id="myChart" width="400" height="400"></canvas>
 </body>
 
+<script type="text/javascript" src="UI.js"></script>
 </html>
