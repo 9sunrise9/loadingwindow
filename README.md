@@ -106,3 +106,6 @@ ipcRenderer.on('minsize', function(event, arg) {
  notify();// 监听异步消息asynchronous-reply
 });
 ```
+
+## [jQuery bug](http://classicoldsong.me/archives/264)
+  <script type="text/javascript" src="jquery.js" onload="window.$ = window.jQuery = module.exports;"></script>

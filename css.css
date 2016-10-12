@@ -1,0 +1,43 @@
+html{
+  width: 1200px;
+  height: 675px;
+}
+body{
+  width: 1200px;
+  height: 675px;
+}
+button{
+  -webkit-app-region: no-drag;
+}
+#fileLoader
+{
+    display:none;
+}
+#dataDropBox {
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    line-height: 10em;
+    font-weight: bolder;
+    top: 30%;
+    margin-top: -80px;
+    left:20;
+    font-size: 15px;
+    text-align: center;
+    color: #a9a9a9;
+    border-radius: 7px;
+    -webkit-app-region: no-drag;
+  }
+  #container {
+    position: absolute;
+      top: 50%;
+      left: 300px;
+      width: 870px;
+      height: 575px;
+      margin-top: -287px;
+      -webkit-app-region: no-drag;
+  }
+  #container {
+    position: absolute;
+      left: 100px;
+  }
