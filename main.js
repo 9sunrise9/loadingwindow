@@ -17,11 +17,11 @@ function createWindow() {
     mainWindow = new BrowserWindow({
         toolbar: false,
         width: 1200,
-        height: 675,
+        height: 686,
         show:false,
         autoHideMenuBar:true,
         icon: '123.png',
-        frame: true
+        frame: false
    });
    const appIcon = new Tray('123.png')
     loadingWindow = new BrowserWindow({
@@ -59,10 +59,8 @@ app.on("ready", () => {
   createWindow();
   tray = new Tray('icon.png')
   const contextMenu = Menu.buildFromTemplate([
-    {label: 'Item1', type: 'radio'},
-    {label: 'Item2', type: 'radio'},
-    {label: 'Item3', type: 'radio', checked: true},
-    {label: 'Item4', type: 'radio'}
+    {label: 'show', type: 'radio'},
+    {label: 'exit', type: 'radio'},
   ])
   tray.setToolTip('This is my application.')
   tray.setContextMenu(contextMenu)
@@ -127,4 +125,9 @@ ipcMain.on('asynchronous-message', (event, arg) => {
 ipcMain.on('synchronous-message', (event, arg) =>{
   console.log(arg);  // prints "ping"
   event.returnValue = 'pong';
+});
+
+ipcMain.on('close-message', (event, arg) =>{
+  console.log(arg);
+  mainWindow.close();
 });

@@ -1,17 +1,33 @@
 html{
-  width: 1200px;
-  height: 675px;
+  -webkit-app-region: drag;
 }
 body{
-  width: 1200px;
-  height: 675px;
+  height: 645px;
+  -webkit-app-region: drag;
 }
 button{
+  -webkit-app-region: no-drag;
+}
+.topbar{
+  height: 27px;
+  -webkit-app-region: drag;
+}
+#close{
+  position: absolute;
+  right: 11px;
+  -webkit-app-region: no-drag;
+}
+#sidebar_menu{
+  background-color: #695f6c;
   -webkit-app-region: no-drag;
 }
 #fileLoader
 {
     display:none;
+}
+#button_test{
+  position: absolute;
+    top: 60%;
 }
 #dataDropBox {
     position: absolute;
@@ -20,7 +36,6 @@ button{
     line-height: 10em;
     font-weight: bolder;
     top: 30%;
-    margin-top: -80px;
     left:20;
     font-size: 15px;
     text-align: center;
@@ -34,10 +49,9 @@ button{
       left: 300px;
       width: 870px;
       height: 575px;
-      margin-top: -287px;
       -webkit-app-region: no-drag;
   }
-  #container {
+  #divider {
     position: absolute;
       left: 100px;
   }

@@ -108,4 +108,20 @@ ipcRenderer.on('minsize', function(event, arg) {
 ```
 
 ## [jQuery bug](http://classicoldsong.me/archives/264)
-  <script type="text/javascript" src="jquery.js" onload="window.$ = window.jQuery = module.exports;"></script>
+
+  方法一：用require引入
+
+  `window.$ = window.jQuery = require(__dirname+'/js/jquery.js');
+
+  方便易用，其他有些脚本也得这样引入，比如Dropzone.js:
+
+  `window.Dropzone = require(__dirname+'/js/dropzone.js');`
+  方法二：直接对script标签做手脚
+
+  其实很简单，在script标签里用一条onload做一点小hack即可，比如：
+
+  `<script src="js/jquery.min.js" onload="window.$ = window.jQuery = module.exports;"></script>`
+
+  原因在于Electron自带module函数，而jQuery又尝试注册一个名为module的全局函数，最终导致jQuery无法被调用。
+
+  但是这样几乎所有的使用jQuery来注册全局函数的插件都要这么来一遍，不大方便
